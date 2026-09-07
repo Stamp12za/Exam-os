@@ -1,58 +1,118 @@
 <!doctype html>
 <html lang="th">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111827"><title>อ่านให้ติด — EXAM OS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>EXAM OS — อ่านให้ติด</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:1100px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.logo{font-size:24px;font-weight:850}.sub{font-size:13px;color:#6b7280}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:16px}.tabs button{white-space:nowrap;background:#fff;color:#374151;border:1px solid #e5e7eb}.tabs button.active{background:#111827;color:#fff}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:17px;margin-bottom:16px;box-shadow:0 5px 20px #00000008}.hero{background:#111827;color:#fff}.hero h1{font-size:30px;margin:5px 0}.muted{color:#6b7280;font-size:13px}.hero .muted{color:#cbd5e1}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.stat{background:#ffffff12;border-radius:12px;padding:11px}.stat b{font-size:21px;display:block}.bar{height:9px;background:#374151;border-radius:99px;overflow:hidden;margin:13px 0}.bar>i{display:block;height:100%;background:#fff;border-radius:99px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}input,select{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:11px;font-size:15px;background:#fff}button{border:0;border-radius:11px;padding:11px 14px;background:#111827;color:#fff;font-weight:750;cursor:pointer}.full{width:100%;margin-top:10px}.task,.chapter{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #eef0f3}.task:last-child,.chapter:last-child{border-bottom:0}.check{width:22px;height:22px;border:2px solid #cbd5e1;border-radius:7px;flex:none}.done .check{background:#111827;border-color:#111827}.done .check:after{content:"✓";color:#fff;margin-left:3px}.done .name{text-decoration:line-through;color:#9ca3af}.grow{flex:1}.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:7px;padding:3px 7px;font-size:11px;margin-top:3px}.danger{background:#f3f4f6;color:#6b7280;padding:7px 9px}.subject{padding:12px;border:1px solid #eee;border-radius:12px;margin:7px 0}.subject b{display:block}.range{width:100%}.empty{text-align:center;padding:24px;color:#9ca3af}.hidden{display:none}.pill{display:inline-block;padding:5px 8px;border-radius:8px;background:#f3f4f6;font-size:12px;margin:3px}.success{font-weight:800}.small{font-size:12px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.app{padding:13px}}
-</style></head>
-<body><div class="app">
-<div class="top"><div><div class="logo">📚 อ่านให้ติด</div><div class="sub">EXAM OS • V2</div></div><button onclick="resetAll()">รีเซ็ต</button></div>
-<div class="tabs"><button class="active" onclick="tab('home',this)">🏠 วันนี้</button><button onclick="tab('subjects',this)">📚 วิชา & บท</button><button onclick="tab('settings',this)">⚙️ ตั้งค่าสอบ</button></div>
+*{box-sizing:border-box}body{margin:0;background:#f4f6fa;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{border:0;border-radius:12px;padding:11px 14px;background:#111827;color:#fff;font-weight:800;cursor:pointer}button.secondary{background:#eef0f4;color:#374151}button.danger{background:#fff0f0;color:#b91c1c}
+.app{max-width:1180px;margin:auto;padding:16px 16px 80px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.brand{display:flex;gap:10px;align-items:center}.brand .icon{font-size:30px}.brand h1{font-size:23px;margin:0}.muted{color:#6b7280;font-size:13px}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:16px;padding-bottom:2px}.tabs button{white-space:nowrap;background:#fff;color:#4b5563;border:1px solid #e5e7eb}.tabs button.active{background:#111827;color:#fff}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:17px;margin-bottom:16px;box-shadow:0 5px 18px #00000008}.hero{background:#111827;color:#fff;border-color:#111827}.hero .muted{color:#cbd5e1}.hero h2{font-size:31px;margin:5px 0}.heroTop{display:flex;justify-content:space-between;gap:10px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.stat{background:#ffffff12;border-radius:13px;padding:11px}.stat b{font-size:21px;display:block}.progress{height:9px;background:#374151;border-radius:99px;overflow:hidden;margin:13px 0}.progress i{display:block;height:100%;background:#fff;border-radius:99px}
+h2{font-size:18px;margin:0 0 13px}h3{font-size:15px;margin:0 0 8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}input,select,textarea{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:11px;background:#fff;color:#111827}textarea{min-height:90px;resize:vertical}.full{width:100%;margin-top:9px}
+.task{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #eef0f3}.task:last-child{border-bottom:0}.check{width:23px;height:23px;border:2px solid #cbd5e1;border-radius:7px;flex:none;cursor:pointer}.done .check{background:#111827;border-color:#111827}.done .check:after{content:"✓";color:white;margin-left:3px}.done .name{text-decoration:line-through;color:#9ca3af}.grow{flex:1}.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:7px;padding:3px 7px;font-size:11px;margin-top:4px}.empty{text-align:center;color:#9ca3af;padding:25px 5px}
+.subject{border:1px solid #e5e7eb;border-radius:14px;padding:13px;margin-bottom:10px}.subjectHead{display:flex;justify-content:space-between;gap:8px}.chapter{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid #f0f1f3}.stars{letter-spacing:1px}.weak{color:#b45309}.strong{color:#15803d}
+.timer{text-align:center}.timerFace{font-size:65px;font-weight:900;letter-spacing:2px;margin:12px 0}.timerMode{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:9px;padding:6px 10px;font-size:12px;font-weight:800}.timerBtns{display:flex;justify-content:center;gap:8px}.timerBtns button{min-width:95px}.focusNote{text-align:left;margin-top:16px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.calHead{font-size:11px;color:#6b7280;text-align:center;padding:5px}.day{min-height:72px;border:1px solid #e5e7eb;border-radius:9px;padding:6px;background:#fff}.day.today{border:2px solid #111827}.dayNum{font-weight:800;font-size:12px}.dot{font-size:10px;margin-top:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.monthNav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.barRow{margin:10px 0}.barLabel{display:flex;justify-content:space-between;font-size:13px}.miniBar{height:8px;background:#eef0f3;border-radius:99px;overflow:hidden;margin-top:5px}.miniBar i{display:block;height:100%;background:#111827}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111827;color:#fff;padding:11px 15px;border-radius:12px;display:none;z-index:10}.toast.show{display:block}
+@media(max-width:780px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.row3{grid-template-columns:1fr}.app{padding:12px}.hero h2{font-size:27px}.day{min-height:62px;padding:5px}.timerFace{font-size:55px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand"><span class="icon">📚</span><div><h1>อ่านให้ติด</h1><div class="muted">EXAM OS • Complete</div></div></div><button class="secondary" onclick="exportData()">สำรองข้อมูล</button></header>
 
-<section id="home">
-<div class="grid"><main>
-<div class="card hero"><div class="muted">เป้าหมายสอบ</div><h1 id="examName">ยังไม่ได้ตั้งสนามสอบ</h1><div id="dateText" class="muted">ตั้งวันสอบเพื่อเริ่มนับถอยหลัง</div><div class="bar"><i id="progressBar" style="width:0%"></i></div><div class="stats"><div class="stat"><b id="days">—</b><span class="muted">วันเหลือ</span></div><div class="stat"><b id="done">0%</b><span class="muted">ทำสำเร็จ</span></div><div class="stat"><b id="left">0</b><span class="muted">งานเหลือ</span></div><div class="stat"><b id="mins">0</b><span class="muted">นาทีวันนี้</span></div></div></div>
-<div class="card"><h2>🎯 ตารางวันนี้</h2><div id="tasks"></div></div>
+<nav class="tabs">
+<button class="active" onclick="showPage('home',this)">🏠 วันนี้</button>
+<button onclick="showPage('subjects',this)">📚 วิชา & บท</button>
+<button onclick="showPage('calendar',this)">🗓️ ปฏิทิน</button>
+<button onclick="showPage('focus',this)">⏱️ Focus</button>
+<button onclick="showPage('stats',this)">📊 สถิติ</button>
+<button onclick="showPage('settings',this)">⚙️ ตั้งค่า</button>
+</nav>
+
+<section id="home" class="page active">
+<div class="grid">
+<main>
+<div class="card hero"><div class="heroTop"><div><div class="muted">เป้าหมายสอบ</div><h2 id="examTitleShow">ยังไม่ได้ตั้งสนามสอบ</h2><div class="muted" id="examDateShow">ตั้งวันสอบเพื่อเริ่มนับถอยหลัง</div></div><div style="font-size:34px">🎯</div></div>
+<div class="progress"><i id="overallBar" style="width:0%"></i></div>
+<div class="stats"><div class="stat"><b id="daysLeft">—</b><span class="muted">วันเหลือ</span></div><div class="stat"><b id="pct">0%</b><span class="muted">สำเร็จ</span></div><div class="stat"><b id="tasksLeft">0</b><span class="muted">งานเหลือ</span></div><div class="stat"><b id="todayMins">0</b><span class="muted">นาทีวันนี้</span></div></div></div>
+
+<div class="card"><h2>🎯 ภารกิจวันนี้</h2><div id="todayTasks"></div></div>
+<div class="card"><h2>🔥 บทที่ควรอ่านก่อน</h2><div id="weakChapters"></div></div>
 </main>
 <aside>
-<div class="card"><h2>➕ เพิ่มภารกิจ</h2><form onsubmit="addTask(event)"><input id="taskName" placeholder="เช่น อ่านฟังก์ชัน" required><div class="row" style="margin-top:9px"><select id="taskSub"></select><input id="taskMins" type="number" min="5" step="5" value="30"></div><select id="taskPri" style="margin-top:9px"><option value="3">🔥 สำคัญมาก</option><option value="2">สำคัญ</option><option value="1">ทั่วไป</option></select><button class="full">เพิ่มเข้าวันนี้</button></form></div>
-<div class="card"><h2>🧠 ระบบจัดแผน</h2><p class="muted">งานจะเรียงตามความสำคัญ และบทที่ความมั่นใจต่ำจะถูกแนะนำก่อน</p><button class="full" onclick="autoPlan()">✨ จัดแผนให้อัตโนมัติ</button></div>
-</aside></div></section>
+<div class="card"><h2>➕ เพิ่มภารกิจ</h2><form onsubmit="addTask(event)">
+<input id="tName" placeholder="เช่น ทำโจทย์ฟังก์ชัน 20 ข้อ" required>
+<div class="row" style="margin-top:9px"><select id="tSub"></select><input id="tMins" type="number" min="5" step="5" value="30"></div>
+<div class="row" style="margin-top:9px"><input id="tDate" type="date"><select id="tPri"><option value="3">🔥 สำคัญมาก</option><option value="2">สำคัญ</option><option value="1">ทั่วไป</option></select></div>
+<button class="full">เพิ่มภารกิจ</button></form></div>
+<div class="card"><h2>✨ จัดแผนอัตโนมัติ</h2><div class="muted">ระบบจะเลือกบทที่ความมั่นใจต่ำก่อน และสร้างงานตามเวลาที่มึงมีวันนี้</div><button class="full" onclick="autoPlan()">จัดแผนวันนี้ให้กู</button></div>
+</aside></div>
+</section>
 
-<section id="subjects" class="hidden"><div class="grid"><main><div class="card"><h2>📚 วิชา & บทเรียน</h2><div id="subjectsList"></div></div></main><aside><div class="card"><h2>➕ เพิ่มบท</h2><form onsubmit="addChapter(event)"><select id="chapterSub"></select><input id="chapterName" placeholder="ชื่อบท เช่น ฟังก์ชัน" required style="margin-top:9px"><label class="small">ความมั่นใจ: <b id="confVal">2</b>/5</label><input id="confidence" class="range" type="range" min="1" max="5" value="2" oninput="confVal.textContent=this.value"><button class="full">เพิ่มบท</button></form></div></aside></div></section>
+<section id="subjects" class="page">
+<div class="grid"><main><div class="card"><h2>📚 วิชา & บทเรียน</h2><div id="subjectList"></div></div></main>
+<aside><div class="card"><h2>➕ เพิ่มบทเรียน</h2><form onsubmit="addChapter(event)"><select id="cSub"></select><input id="cName" placeholder="เช่น ฟังก์ชัน" style="margin-top:9px" required><label class="muted">ความมั่นใจ <b id="confText">2</b>/5</label><input id="cConf" type="range" min="1" max="5" value="2" oninput="confText.textContent=this.value"><button class="full">เพิ่มบท</button></form></div>
+<div class="card"><h2>➕ เพิ่มวิชา</h2><form onsubmit="addSubject(event)"><input id="newSub" placeholder="เช่น A-Level อังกฤษ" required><button class="full">เพิ่มวิชา</button></form></div></aside></div>
+</section>
 
-<section id="settings" class="hidden"><div class="card"><h2>🏁 ตั้งค่าสนามสอบ</h2><input id="examTitle" placeholder="เช่น A-Level 69"><input id="examDate" type="date" style="margin-top:9px"><div class="row" style="margin-top:9px"><input id="dailyMins" type="number" min="15" value="180" placeholder="เวลาว่าง/วัน"><input id="targetScore" type="number" min="0" max="100" value="80" placeholder="เป้าคะแนน %"></div><button class="full" onclick="saveSettings()">บันทึกเป้าหมาย</button></div><div class="card"><h2>💡 วิธีใช้</h2><div class="muted">ตั้งวันสอบ → เพิ่มวิชา/บท → ให้คะแนนความมั่นใจ → กด “จัดแผนให้อัตโนมัติ” เพื่อสร้างภารกิจจากบทที่อ่อนที่สุด</div></div></section>
+<section id="calendar" class="page"><div class="card"><div class="monthNav"><button class="secondary" onclick="changeMonth(-1)">‹</button><h2 id="monthTitle" style="margin:0"></h2><button class="secondary" onclick="changeMonth(1)">›</button></div><div class="calendar" id="calendarGrid"></div></div></section>
+
+<section id="focus" class="page"><div class="grid"><main><div class="card timer"><h2>⏱️ Focus Timer</h2><span class="timerMode" id="timerMode">โฟกัส 25 นาที</span><div class="timerFace" id="timerFace">25:00</div><div class="timerBtns"><button onclick="timerStart()" id="timerStartBtn">เริ่ม</button><button class="secondary" onclick="timerPause()">พัก</button><button class="secondary" onclick="timerReset()">รีเซ็ต</button></div><div class="focusNote"><label class="muted">กำลังอ่านอะไร?</label><select id="focusTask" class="full"></select></div></div></main><aside><div class="card"><h2>⚙️ ตั้งเวลา</h2><div class="row"><input id="focusMin" type="number" min="1" value="25"><input id="breakMin" type="number" min="1" value="5"></div><button class="full" onclick="setTimer()">ตั้งเวลา</button><div class="muted" style="margin-top:12px">เมื่อจบ Focus ระบบจะบันทึกนาทีที่อ่านให้ในสถิติ</div></div></aside></div></section>
+
+<section id="stats" class="page"><div class="grid"><main><div class="card"><h2>📊 ความคืบหน้ารายวิชา</h2><div id="subjectStats"></div></div><div class="card"><h2>📈 สรุปการอ่าน</h2><div class="stats" style="color:#111827"><div class="stat" style="background:#f4f5f7"><b id="totalDone">0</b><span class="muted">งานเสร็จ</span></div><div class="stat" style="background:#f4f5f7"><b id="totalStudy">0</b><span class="muted">นาทีสะสม</span></div><div class="stat" style="background:#f4f5f7"><b id="bestSubject">—</b><span class="muted">วิชาเด่น</span></div><div class="stat" style="background:#f4f5f7"><b id="streak">0</b><span class="muted">🔥 streak</span></div></div></div></main><aside><div class="card"><h2>🧠 คะแนนความมั่นใจ</h2><div class="muted">ค่าเฉลี่ยจากทุกบท ยิ่งต่ำยิ่งควรรีบอ่าน</div><div id="confidenceSummary" style="margin-top:12px"></div></div></aside></div></section>
+
+<section id="settings" class="page"><div class="card"><h2>🏁 สนามสอบ</h2><div class="row"><input id="sTitle" placeholder="เช่น A-Level 69"><input id="sDate" type="date"></div><div class="row" style="margin-top:9px"><input id="sDaily" type="number" min="15" value="180" placeholder="นาทีที่มี/วัน"><input id="sTarget" type="number" min="0" max="100" value="80" placeholder="เป้าคะแนน %"></div><button onclick="saveSettings()" class="full">บันทึกการตั้งค่า</button></div>
+<div class="card"><h2>💾 ข้อมูล</h2><div class="row"><button onclick="exportData()">ส่งออกข้อมูล</button><label><input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(event)"><span class="buttonLike" style="display:block;text-align:center;background:#eef0f4;color:#374151;padding:11px;border-radius:12px;font-weight:800;cursor:pointer">นำเข้าข้อมูล</span></label></div><button class="full danger" onclick="resetAll()">ล้างข้อมูลทั้งหมด</button></div></section>
 </div>
+<div id="toast" class="toast"></div>
 <script>
-const KEY="exam_os_v2";let s=JSON.parse(localStorage.getItem(KEY)||'{"tasks":[],"subjects":["คณิต","ฟิสิกส์","เคมี","ชีวะ","อังกฤษ","ไทย","สังคม"],"chapters":[],"exam":{"title":"","date":"","dailyMins":180,"target":80}}');
-function save(){localStorage.setItem(KEY,JSON.stringify(s));render()}
+const KEY="exam_os_complete_v1";
+const today=()=>new Date().toISOString().slice(0,10);
+let data=JSON.parse(localStorage.getItem(KEY)||'{"subjects":["คณิต","ฟิสิกส์","เคมี","ชีวะ","อังกฤษ","ไทย","สังคม"],"chapters":[],"tasks":[],"studyMinutes":0,"studyBySubject":{},"exam":{"title":"","date":"","daily":180,"target":80},"streak":0,"lastStudy":""}');
+let calDate=new Date(),timer={sec:1500,running:false,interval:null,mode:"focus"};
+
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function opts(id){document.getElementById(id).innerHTML=s.subjects.map(x=>`<option>${esc(x)}</option>`).join("")}
-function addTask(e){e.preventDefault();s.tasks.push({id:Date.now(),name:taskName.value,subject:taskSub.value,mins:+taskMins.value||30,priority:+taskPri.value,done:false});taskName.value="";save()}
-function toggle(id){let t=s.tasks.find(x=>x.id===id);t.done=!t.done;save()}
-function removeTask(id){s.tasks=s.tasks.filter(x=>x.id!==id);save()}
-function addChapter(e){e.preventDefault();s.chapters.push({id:Date.now(),subject:chapterSub.value,name:chapterName.value,confidence:+confidence.value});chapterName.value="";confidence.value=2;confVal.textContent=2;save()}
-function autoPlan(){
- const weak=[...s.chapters].sort((a,b)=>a.confidence-b.confidence).slice(0,Math.max(1,Math.floor(s.exam.dailyMins/40)));
- weak.forEach((c,i)=>{s.tasks.push({id:Date.now()+i,name:"ทบทวน "+c.name,subject:c.subject,mins:40,priority:c.confidence<=2?3:2,done:false})});
- if(!weak.length)s.tasks.push({id:Date.now(),name:"เพิ่มบทเรียนเพื่อให้ระบบจัดแผน",subject:s.subjects[0],mins:30,priority:3,done:false});
- save();alert("จัดแผนให้แล้ว 🔥")
-}
-function saveSettings(){s.exam={title:examTitle.value,date:examDate.value,dailyMins:+dailyMins.value||180,target:+targetScore.value||80};save();alert("บันทึกเป้าหมายแล้ว")}
-function tab(id,btn){["home","subjects","settings"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
-function resetAll(){if(confirm("ลบข้อมูลทั้งหมด?")){localStorage.removeItem(KEY);location.reload()}}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
+function opts(id){document.getElementById(id).innerHTML=data.subjects.map(s=>`<option>${esc(s)}</option>`).join("")}
+function showPage(id,btn){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");render()}
+function addTask(e){e.preventDefault();let d=tDate.value||today();data.tasks.push({id:Date.now(),name:tName.value,subject:tSub.value,mins:+tMins.value||30,date:d,priority:+tPri.value,done:false});tName.value="";tDate.value=today();save();toast("เพิ่มภารกิจแล้ว 🔥")}
+function toggleTask(id){let t=data.tasks.find(x=>x.id===id);if(!t)return;t.done=!t.done;if(t.done){data.studyMinutes+=(+t.mins||0);data.studyBySubject[t.subject]=(data.studyBySubject[t.subject]||0)+(+t.mins||0);let y=new Date();let td=today();if(data.lastStudy!==td){let prev=new Date();prev.setDate(prev.getDate()-1);data.streak=data.lastStudy===prev.toISOString().slice(0,10)?data.streak+1:1;data.lastStudy=td}}save()}
+function removeTask(id){data.tasks=data.tasks.filter(x=>x.id!==id);save()}
+function addChapter(e){e.preventDefault();data.chapters.push({id:Date.now(),subject:cSub.value,name:cName.value,confidence:+cConf.value});cName.value="";cConf.value=2;confText.textContent=2;save();toast("เพิ่มบทแล้ว")}
+function removeChapter(id){data.chapters=data.chapters.filter(c=>c.id!==id);save()}
+function addSubject(e){e.preventDefault();if(data.subjects.includes(newSub.value.trim()))return toast("มีวิชานี้แล้ว");data.subjects.push(newSub.value.trim());newSub.value="";save();toast("เพิ่มวิชาแล้ว")}
+function autoPlan(){let remain=Math.max(30,+data.exam.daily||180);let weak=[...data.chapters].sort((a,b)=>a.confidence-b.confidence);if(!weak.length){toast("เพิ่มบทเรียนก่อนนะ");return}let made=0;for(let c of weak){if(remain<20)break;let m=Math.min(40,remain);data.tasks.push({id:Date.now()+made,name:"ทบทวน "+c.name,subject:c.subject,mins:m,date:today(),priority:c.confidence<=2?3:2,done:false});remain-=m;made++}save();toast(`จัดแผนให้ ${made} ภารกิจแล้ว ✨`)}
+function saveSettings(){data.exam={title:sTitle.value,date:sDate.value,daily:+sDaily.value||180,target:+sTarget.value||80};save();toast("บันทึกแล้ว")}
+function changeMonth(n){calDate.setMonth(calDate.getMonth()+n);renderCalendar()}
+function renderCalendar(){let y=calDate.getFullYear(),m=calDate.getMonth();monthTitle.textContent=new Date(y,m,1).toLocaleDateString("th-TH",{month:"long",year:"numeric"});let first=new Date(y,m,1).getDay();let days=new Date(y,m+1,0).getDate(),names=["อา","จ","อ","พ","พฤ","ศ","ส"];let h=names.map(x=>`<div class="calHead">${x}</div>`).join("");for(let i=0;i<first;i++)h+="<div></div>";for(let d=1;d<=days;d++){let ds=new Date(y,m,d).toISOString().slice(0,10),ts=data.tasks.filter(t=>t.date===ds);h+=`<div class="day ${ds===today()?"today":""}"><div class="dayNum">${d}</div>${ts.slice(0,3).map(t=>`<span class="dot">${t.done?"✅":"•"} ${esc(t.name)}</span>`).join("")}</div>`}calendarGrid.innerHTML=h}
+function setTimer(){timer.sec=(+focusMin.value||25)*60;timer.breakSec=(+breakMin.value||5)*60;timer.mode="focus";timerRender();toast("ตั้งเวลาแล้ว")}
+function timerStart(){if(timer.running)return;timer.running=true;timer.interval=setInterval(()=>{timer.sec--;if(timer.sec<=0){timer.running=false;clearInterval(timer.interval);if(timer.mode==="focus"){let mins=+focusMin.value||25;data.studyMinutes+=mins;let sub=(focusTask.value||"ทั่วไป");data.studyBySubject[sub]=(data.studyBySubject[sub]||0)+mins;save();timer.mode="break";timer.sec=(+breakMin.value||5)*60;toast("Focus เสร็จแล้ว! พักได้ 🧠")}else{timer.mode="focus";timer.sec=(+focusMin.value||25)*60;toast("หมดเวลาพัก ลุยต่อ 🔥")}timerRender()}else timerRender()},1000);timerRender()}
+function timerPause(){timer.running=false;clearInterval(timer.interval);timerRender()}
+function timerReset(){timerPause();timer.mode="focus";timer.sec=(+focusMin.value||25)*60;timerRender()}
+function timerRender(){let m=Math.floor(timer.sec/60),s=timer.sec%60;timerFace.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");timerMode.textContent=timer.mode==="focus"?"โฟกัส":"พัก";timerStartBtn.textContent=timer.running?"กำลังโฟกัส…":"เริ่ม"}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="exam-os-backup.json";a.click();URL.revokeObjectURL(a.href);toast("ส่งออกข้อมูลแล้ว")}
+function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);save();toast("นำเข้าข้อมูลแล้ว")}catch{toast("ไฟล์ไม่ถูกต้อง")}};r.readAsText(f)}
+function resetAll(){if(confirm("ลบข้อมูลทั้งหมดจริงไหม?")){localStorage.removeItem(KEY);location.reload()}}
 function render(){
- opts("taskSub");opts("chapterSub");
- const total=s.tasks.length,done=s.tasks.filter(x=>x.done).length,pct=total?Math.round(done/total*100):0;
- document.getElementById("examName").textContent=s.exam.title||"ยังไม่ได้ตั้งสนามสอบ";
- document.getElementById("dateText").textContent=s.exam.date?("วันสอบ "+new Date(s.exam.date+"T00:00:00").toLocaleDateString("th-TH")):"ตั้งวันสอบเพื่อเริ่มนับถอยหลัง";
- let d=s.exam.date?Math.ceil((new Date(s.exam.date+"T00:00:00")-new Date())/86400000):null;document.getElementById("days").textContent=d===null?"—":Math.max(0,d);
- document.getElementById("done").textContent=pct+"%";document.getElementById("left").textContent=total-done;document.getElementById("mins").textContent=s.tasks.filter(x=>!x.done).reduce((a,x)=>a+x.mins,0);document.getElementById("progressBar").style.width=pct+"%";
- let ts=[...s.tasks].sort((a,b)=>(b.priority-a.priority)||(+a.done-+b.done));document.getElementById("tasks").innerHTML=ts.length?ts.map(t=>`<div class="task ${t.done?"done":""}"><div class="check" onclick="toggle(${t.id})"></div><div class="grow"><div class="name">${esc(t.name)}</div><span class="tag">${esc(t.subject)} • ${t.mins} นาที</span></div><button class="danger" onclick="removeTask(${t.id})">×</button></div>`).join(""):"<div class='empty'>ยังไม่มีภารกิจ<br>เพิ่มงาน หรือกดจัดแผนอัตโนมัติ 👆</div>";
- document.getElementById("subjectsList").innerHTML=s.subjects.map(sub=>{let cs=s.chapters.filter(c=>c.subject===sub);return `<div class="subject"><b>${esc(sub)}</b>${cs.length?cs.map(c=>`<div class="chapter"><div class="grow">${esc(c.name)}<br><span class="tag">ความมั่นใจ ${c.confidence}/5</span></div></div>`).join(""):"<span class='muted'>ยังไม่มีบท</span>"}</div>`}).join("");
- examTitle.value=s.exam.title;examDate.value=s.exam.date;dailyMins.value=s.exam.dailyMins;targetScore.value=s.exam.target;
+opts("tSub");opts("cSub");focusTask.innerHTML=data.subjects.map(s=>`<option>${esc(s)}</option>`).join("");
+let ts=data.tasks.filter(t=>t.date===today()).sort((a,b)=>(b.priority-a.priority)||(+a.done-+b.done)),done=data.tasks.filter(t=>t.done).length,total=data.tasks.length,pct=total?Math.round(done/total*100):0;
+examTitleShow.textContent=data.exam.title||"ยังไม่ได้ตั้งสนามสอบ";examDateShow.textContent=data.exam.date?("วันสอบ "+new Date(data.exam.date+"T00:00:00").toLocaleDateString("th-TH")):"ตั้งวันสอบเพื่อเริ่มนับถอยหลัง";let dl=data.exam.date?Math.ceil((new Date(data.exam.date+"T00:00:00")-new Date())/86400000):null;daysLeft.textContent=dl===null?"—":Math.max(0,dl);pct.textContent=pct+"%";tasksLeft.textContent=total-done;todayMins.textContent=ts.filter(t=>!t.done).reduce((a,t)=>a+t.mins,0);overallBar.style.width=pct+"%";
+todayTasks.innerHTML=ts.length?ts.map(t=>`<div class="task ${t.done?"done":""}"><div class="check" onclick="toggleTask(${t.id})"></div><div class="grow"><div class="name">${esc(t.name)}</div><span class="tag">${esc(t.subject)} • ${t.mins} นาที</span></div><button class="danger" onclick="removeTask(${t.id})">×</button></div>`).join(""):"<div class='empty'>ยังไม่มีภารกิจวันนี้<br>เพิ่มงานหรือกดจัดแผนอัตโนมัติ 👆</div>";
+let weak=[...data.chapters].sort((a,b)=>a.confidence-b.confidence).slice(0,5);weakChapters.innerHTML=weak.length?weak.map(c=>`<div class="barRow"><div class="barLabel"><span>${esc(c.subject)} — ${esc(c.name)}</span><b>${c.confidence}/5</b></div><div class="miniBar"><i style="width:${c.confidence*20}%"></i></div></div>`).join(""):"<div class='empty'>เพิ่มบทเรียนก่อน แล้วระบบจะหาบทที่ควรอ่านให้</div>";
+subjectList.innerHTML=data.subjects.map(s=>{let cs=data.chapters.filter(c=>c.subject===s);return `<div class="subject"><div class="subjectHead"><b>${esc(s)}</b><span class="muted">${cs.length} บท</span></div>${cs.length?cs.map(c=>`<div class="chapter"><div class="grow">${esc(c.name)}<br><span class="stars">${"★".repeat(c.confidence)}${"☆".repeat(5-c.confidence)}</span> <span class="muted">${c.confidence}/5</span></div><button class="danger" onclick="removeChapter(${c.id})">×</button></div>`).join(""):"<div class='muted' style='padding-top:8px'>ยังไม่มีบท</div>"}</div>`}).join("");
+subjectStats.innerHTML=data.subjects.map(s=>{let cs=data.chapters.filter(c=>c.subject===s),avg=cs.length?Math.round(cs.reduce((a,c)=>a+c.confidence,0)/cs.length*20):0,study=data.studyBySubject[s]||0;return `<div class="barRow"><div class="barLabel"><span>${esc(s)}</span><b>${avg}% • ${study} นาที</b></div><div class="miniBar"><i style="width:${avg}%"></i></div></div>`}).join("");
+let vals=data.subjects.map(s=>[s,data.studyBySubject[s]||0]).sort((a,b)=>b[1]-a[1]);bestSubject.textContent=vals[0]&&vals[0][1]?vals[0][0]:"—";totalDone.textContent=done;totalStudy.textContent=data.studyMinutes;streak.textContent=data.streak;
+let av=data.chapters.length?Math.round(data.chapters.reduce((a,c)=>a+c.confidence,0)/data.chapters.length*10)/10:0;confidenceSummary.innerHTML=`<div style="font-size:34px;font-weight:900">${av||"—"}/5</div><div class="muted">ค่าเฉลี่ยความมั่นใจ</div>`;
+sTitle.value=data.exam.title;sDate.value=data.exam.date;sDaily.value=data.exam.daily;sTarget.value=data.exam.target;
+tDate.value=tDate.value||today();renderCalendar();timerRender();
 }
 render();
-</script></body></html>
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body></html>
