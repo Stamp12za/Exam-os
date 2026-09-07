@@ -1,104 +1,58 @@
 <!doctype html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111827">
-<title>อ่านให้ติด — Exam Planner</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827"><title>อ่านให้ติด — EXAM OS</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f7fb;color:#111827}
-.app{max-width:1100px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
-.logo{font-size:25px;font-weight:800}.sub{color:#6b7280;font-size:13px;margin-top:3px}
-button{border:0;border-radius:12px;padding:11px 15px;font-weight:700;cursor:pointer;background:#111827;color:white}
-.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}.card{background:white;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:0 4px 18px #00000008}
-.hero{background:#111827;color:white}.hero .muted{color:#cbd5e1}.hero h1{font-size:31px;margin:6px 0 8px}.progress{height:10px;background:#374151;border-radius:99px;overflow:hidden;margin:14px 0}.bar{height:100%;background:#fff;border-radius:99px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.stat{background:#ffffff12;border-radius:13px;padding:12px}.stat b{display:block;font-size:21px}.muted{color:#6b7280;font-size:13px}
-h2{font-size:18px;margin:0 0 14px}.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #eef0f3}.task:last-child{border-bottom:0}.check{width:22px;height:22px;border:2px solid #cbd5e1;border-radius:7px;flex:none}.done .check{background:#111827;border-color:#111827;position:relative}.done .check:after{content:"✓";color:#fff;position:absolute;font-size:14px;left:3px;top:-1px}.done .name{text-decoration:line-through;color:#9ca3af}.taskinfo{flex:1}.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:7px;padding:4px 7px;font-size:11px;margin-top:4px}
-form{display:grid;gap:10px}input,select{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:11px;font-size:15px;background:#fff}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.empty{padding:25px 0;text-align:center;color:#9ca3af}
-@media(max-width:750px){.grid{grid-template-columns:1fr}.top{align-items:flex-start}.stats{grid-template-columns:1fr 1fr 1fr}.app{padding:15px}}
-</style>
-</head>
-<body>
-<div class="app">
-  <div class="top">
-    <div><div class="logo">📚 อ่านให้ติด</div><div class="sub">Exam Planner • เวอร์ชันต้นแบบ</div></div>
-    <button onclick="resetAll()">รีเซ็ต</button>
-  </div>
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:1100px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.logo{font-size:24px;font-weight:850}.sub{font-size:13px;color:#6b7280}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:16px}.tabs button{white-space:nowrap;background:#fff;color:#374151;border:1px solid #e5e7eb}.tabs button.active{background:#111827;color:#fff}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:17px;margin-bottom:16px;box-shadow:0 5px 20px #00000008}.hero{background:#111827;color:#fff}.hero h1{font-size:30px;margin:5px 0}.muted{color:#6b7280;font-size:13px}.hero .muted{color:#cbd5e1}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.stat{background:#ffffff12;border-radius:12px;padding:11px}.stat b{font-size:21px;display:block}.bar{height:9px;background:#374151;border-radius:99px;overflow:hidden;margin:13px 0}.bar>i{display:block;height:100%;background:#fff;border-radius:99px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}input,select{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:11px;font-size:15px;background:#fff}button{border:0;border-radius:11px;padding:11px 14px;background:#111827;color:#fff;font-weight:750;cursor:pointer}.full{width:100%;margin-top:10px}.task,.chapter{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #eef0f3}.task:last-child,.chapter:last-child{border-bottom:0}.check{width:22px;height:22px;border:2px solid #cbd5e1;border-radius:7px;flex:none}.done .check{background:#111827;border-color:#111827}.done .check:after{content:"✓";color:#fff;margin-left:3px}.done .name{text-decoration:line-through;color:#9ca3af}.grow{flex:1}.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:7px;padding:3px 7px;font-size:11px;margin-top:3px}.danger{background:#f3f4f6;color:#6b7280;padding:7px 9px}.subject{padding:12px;border:1px solid #eee;border-radius:12px;margin:7px 0}.subject b{display:block}.range{width:100%}.empty{text-align:center;padding:24px;color:#9ca3af}.hidden{display:none}.pill{display:inline-block;padding:5px 8px;border-radius:8px;background:#f3f4f6;font-size:12px;margin:3px}.success{font-weight:800}.small{font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.app{padding:13px}}
+</style></head>
+<body><div class="app">
+<div class="top"><div><div class="logo">📚 อ่านให้ติด</div><div class="sub">EXAM OS • V2</div></div><button onclick="resetAll()">รีเซ็ต</button></div>
+<div class="tabs"><button class="active" onclick="tab('home',this)">🏠 วันนี้</button><button onclick="tab('subjects',this)">📚 วิชา & บท</button><button onclick="tab('settings',this)">⚙️ ตั้งค่าสอบ</button></div>
 
-  <div class="grid">
-    <section>
-      <div class="card hero">
-        <div class="muted">ภารกิจวันนี้</div>
-        <h1 id="todayTitle">เริ่มจากสิ่งที่สำคัญที่สุด</h1>
-        <div class="muted" id="summary">0 จาก 0 ภารกิจเสร็จแล้ว</div>
-        <div class="progress"><div class="bar" id="bar" style="width:0%"></div></div>
-        <div class="stats">
-          <div class="stat"><b id="remaining">0</b><span class="muted">งานเหลือ</span></div>
-          <div class="stat"><b id="minutes">0</b><span class="muted">นาที</span></div>
-          <div class="stat"><b id="streak">0</b><span class="muted">🔥 streak</span></div>
-        </div>
-      </div>
+<section id="home">
+<div class="grid"><main>
+<div class="card hero"><div class="muted">เป้าหมายสอบ</div><h1 id="examName">ยังไม่ได้ตั้งสนามสอบ</h1><div id="dateText" class="muted">ตั้งวันสอบเพื่อเริ่มนับถอยหลัง</div><div class="bar"><i id="progressBar" style="width:0%"></i></div><div class="stats"><div class="stat"><b id="days">—</b><span class="muted">วันเหลือ</span></div><div class="stat"><b id="done">0%</b><span class="muted">ทำสำเร็จ</span></div><div class="stat"><b id="left">0</b><span class="muted">งานเหลือ</span></div><div class="stat"><b id="mins">0</b><span class="muted">นาทีวันนี้</span></div></div></div>
+<div class="card"><h2>🎯 ตารางวันนี้</h2><div id="tasks"></div></div>
+</main>
+<aside>
+<div class="card"><h2>➕ เพิ่มภารกิจ</h2><form onsubmit="addTask(event)"><input id="taskName" placeholder="เช่น อ่านฟังก์ชัน" required><div class="row" style="margin-top:9px"><select id="taskSub"></select><input id="taskMins" type="number" min="5" step="5" value="30"></div><select id="taskPri" style="margin-top:9px"><option value="3">🔥 สำคัญมาก</option><option value="2">สำคัญ</option><option value="1">ทั่วไป</option></select><button class="full">เพิ่มเข้าวันนี้</button></form></div>
+<div class="card"><h2>🧠 ระบบจัดแผน</h2><p class="muted">งานจะเรียงตามความสำคัญ และบทที่ความมั่นใจต่ำจะถูกแนะนำก่อน</p><button class="full" onclick="autoPlan()">✨ จัดแผนให้อัตโนมัติ</button></div>
+</aside></div></section>
 
-      <div class="card" style="margin-top:18px">
-        <h2>🎯 ตารางวันนี้</h2>
-        <div id="tasks"></div>
-      </div>
-    </section>
+<section id="subjects" class="hidden"><div class="grid"><main><div class="card"><h2>📚 วิชา & บทเรียน</h2><div id="subjectsList"></div></div></main><aside><div class="card"><h2>➕ เพิ่มบท</h2><form onsubmit="addChapter(event)"><select id="chapterSub"></select><input id="chapterName" placeholder="ชื่อบท เช่น ฟังก์ชัน" required style="margin-top:9px"><label class="small">ความมั่นใจ: <b id="confVal">2</b>/5</label><input id="confidence" class="range" type="range" min="1" max="5" value="2" oninput="confVal.textContent=this.value"><button class="full">เพิ่มบท</button></form></div></aside></div></section>
 
-    <aside class="card">
-      <h2>➕ เพิ่มภารกิจ</h2>
-      <form onsubmit="addTask(event)">
-        <input id="name" placeholder="เช่น อ่านฟังก์ชัน" required>
-        <div class="row">
-          <select id="subject">
-            <option>คณิต</option><option>ฟิสิกส์</option><option>เคมี</option>
-            <option>ชีวะ</option><option>อังกฤษ</option><option>ไทย</option><option>สังคม</option>
-          </select>
-          <input id="mins" type="number" min="5" step="5" value="30" placeholder="นาที">
-        </div>
-        <select id="priority"><option value="3">สำคัญมาก</option><option value="2">สำคัญ</option><option value="1">ทั่วไป</option></select>
-        <button>เพิ่มเข้าวันนี้</button>
-      </form>
-      <div style="margin-top:22px;padding-top:16px;border-top:1px solid #eee">
-        <h2>🧠 หลักการจัดแผน</h2>
-        <div class="muted">ระบบต้นแบบจะเรียง “สำคัญมาก → สำคัญ → ทั่วไป” และดันงานที่ยังไม่เสร็จขึ้นมาก่อน</div>
-      </div>
-    </aside>
-  </div>
+<section id="settings" class="hidden"><div class="card"><h2>🏁 ตั้งค่าสนามสอบ</h2><input id="examTitle" placeholder="เช่น A-Level 69"><input id="examDate" type="date" style="margin-top:9px"><div class="row" style="margin-top:9px"><input id="dailyMins" type="number" min="15" value="180" placeholder="เวลาว่าง/วัน"><input id="targetScore" type="number" min="0" max="100" value="80" placeholder="เป้าคะแนน %"></div><button class="full" onclick="saveSettings()">บันทึกเป้าหมาย</button></div><div class="card"><h2>💡 วิธีใช้</h2><div class="muted">ตั้งวันสอบ → เพิ่มวิชา/บท → ให้คะแนนความมั่นใจ → กด “จัดแผนให้อัตโนมัติ” เพื่อสร้างภารกิจจากบทที่อ่อนที่สุด</div></div></section>
 </div>
-
 <script>
-const KEY="exam_plan_v1";
-let state=JSON.parse(localStorage.getItem(KEY)||'{"tasks":[],"streak":0}');
-function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
-function addTask(e){
- e.preventDefault();
- state.tasks.push({id:Date.now(),name:name.value,subject:subject.value,mins:+mins.value||30,priority:+priority.value,done:false});
- document.getElementById("name").value="";
- save();
+const KEY="exam_os_v2";let s=JSON.parse(localStorage.getItem(KEY)||'{"tasks":[],"subjects":["คณิต","ฟิสิกส์","เคมี","ชีวะ","อังกฤษ","ไทย","สังคม"],"chapters":[],"exam":{"title":"","date":"","dailyMins":180,"target":80}}');
+function save(){localStorage.setItem(KEY,JSON.stringify(s));render()}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function opts(id){document.getElementById(id).innerHTML=s.subjects.map(x=>`<option>${esc(x)}</option>`).join("")}
+function addTask(e){e.preventDefault();s.tasks.push({id:Date.now(),name:taskName.value,subject:taskSub.value,mins:+taskMins.value||30,priority:+taskPri.value,done:false});taskName.value="";save()}
+function toggle(id){let t=s.tasks.find(x=>x.id===id);t.done=!t.done;save()}
+function removeTask(id){s.tasks=s.tasks.filter(x=>x.id!==id);save()}
+function addChapter(e){e.preventDefault();s.chapters.push({id:Date.now(),subject:chapterSub.value,name:chapterName.value,confidence:+confidence.value});chapterName.value="";confidence.value=2;confVal.textContent=2;save()}
+function autoPlan(){
+ const weak=[...s.chapters].sort((a,b)=>a.confidence-b.confidence).slice(0,Math.max(1,Math.floor(s.exam.dailyMins/40)));
+ weak.forEach((c,i)=>{s.tasks.push({id:Date.now()+i,name:"ทบทวน "+c.name,subject:c.subject,mins:40,priority:c.confidence<=2?3:2,done:false})});
+ if(!weak.length)s.tasks.push({id:Date.now(),name:"เพิ่มบทเรียนเพื่อให้ระบบจัดแผน",subject:s.subjects[0],mins:30,priority:3,done:false});
+ save();alert("จัดแผนให้แล้ว 🔥")
 }
-function toggle(id){let t=state.tasks.find(x=>x.id===id); if(t)t.done=!t.done; save()}
-function removeTask(id){state.tasks=state.tasks.filter(x=>x.id!==id);save()}
+function saveSettings(){s.exam={title:examTitle.value,date:examDate.value,dailyMins:+dailyMins.value||180,target:+targetScore.value||80};save();alert("บันทึกเป้าหมายแล้ว")}
+function tab(id,btn){["home","subjects","settings"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
+function resetAll(){if(confirm("ลบข้อมูลทั้งหมด?")){localStorage.removeItem(KEY);location.reload()}}
 function render(){
- const tasks=[...state.tasks].sort((a,b)=>(b.priority-a.priority)||(+a.done-+b.done));
- const done=tasks.filter(t=>t.done).length,total=tasks.length;
- document.getElementById("summary").textContent=`${done} จาก ${total} ภารกิจเสร็จแล้ว`;
- document.getElementById("bar").style.width=(total?done/total*100:0)+"%";
- document.getElementById("remaining").textContent=total-done;
- document.getElementById("minutes").textContent=tasks.filter(t=>!t.done).reduce((s,t)=>s+t.mins,0);
- document.getElementById("streak").textContent=state.streak;
- document.getElementById("todayTitle").textContent=total? (done===total?"🔥 วันนี้เอาอยู่!":"ทำภารกิจต่อไปให้เสร็จ"): "เริ่มจากสิ่งที่สำคัญที่สุด";
- const box=document.getElementById("tasks");
- box.innerHTML=tasks.length?tasks.map(t=>`
- <div class="task ${t.done?'done':''}">
-   <div class="check" onclick="toggle(${t.id})"></div>
-   <div class="taskinfo"><div class="name">${escapeHtml(t.name)}</div><span class="tag">${t.subject} • ${t.mins} นาที</span></div>
-   <button style="padding:7px 9px;background:#f3f4f6;color:#6b7280" onclick="removeTask(${t.id})">×</button>
- </div>`).join(""):`<div class="empty">ยังไม่มีภารกิจ<br>เพิ่มงานแรกของมึงได้เลย 👆</div>`;
+ opts("taskSub");opts("chapterSub");
+ const total=s.tasks.length,done=s.tasks.filter(x=>x.done).length,pct=total?Math.round(done/total*100):0;
+ document.getElementById("examName").textContent=s.exam.title||"ยังไม่ได้ตั้งสนามสอบ";
+ document.getElementById("dateText").textContent=s.exam.date?("วันสอบ "+new Date(s.exam.date+"T00:00:00").toLocaleDateString("th-TH")):"ตั้งวันสอบเพื่อเริ่มนับถอยหลัง";
+ let d=s.exam.date?Math.ceil((new Date(s.exam.date+"T00:00:00")-new Date())/86400000):null;document.getElementById("days").textContent=d===null?"—":Math.max(0,d);
+ document.getElementById("done").textContent=pct+"%";document.getElementById("left").textContent=total-done;document.getElementById("mins").textContent=s.tasks.filter(x=>!x.done).reduce((a,x)=>a+x.mins,0);document.getElementById("progressBar").style.width=pct+"%";
+ let ts=[...s.tasks].sort((a,b)=>(b.priority-a.priority)||(+a.done-+b.done));document.getElementById("tasks").innerHTML=ts.length?ts.map(t=>`<div class="task ${t.done?"done":""}"><div class="check" onclick="toggle(${t.id})"></div><div class="grow"><div class="name">${esc(t.name)}</div><span class="tag">${esc(t.subject)} • ${t.mins} นาที</span></div><button class="danger" onclick="removeTask(${t.id})">×</button></div>`).join(""):"<div class='empty'>ยังไม่มีภารกิจ<br>เพิ่มงาน หรือกดจัดแผนอัตโนมัติ 👆</div>";
+ document.getElementById("subjectsList").innerHTML=s.subjects.map(sub=>{let cs=s.chapters.filter(c=>c.subject===sub);return `<div class="subject"><b>${esc(sub)}</b>${cs.length?cs.map(c=>`<div class="chapter"><div class="grow">${esc(c.name)}<br><span class="tag">ความมั่นใจ ${c.confidence}/5</span></div></div>`).join(""):"<span class='muted'>ยังไม่มีบท</span>"}</div>`}).join("");
+ examTitle.value=s.exam.title;examDate.value=s.exam.date;dailyMins.value=s.exam.dailyMins;targetScore.value=s.exam.target;
 }
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function resetAll(){if(confirm("ลบข้อมูลทั้งหมด?")){state={tasks:[],streak:0};save()}}
 render();
-</script>
-</body>
-</html>
+</script></body></html>
