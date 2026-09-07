@@ -71,7 +71,7 @@ h2{font-size:18px;margin:0 0 13px}h3{font-size:15px;margin:0 0 8px}.row{display:
 </div>
 <div id="toast" class="toast"></div>
 <script>
-const KEY="exam_os_complete_v1";
+const KEY="exam_os_complete_v2";
 const today=()=>new Date().toISOString().slice(0,10);
 let data=JSON.parse(localStorage.getItem(KEY)||'{"subjects":["คณิต","ฟิสิกส์","เคมี","ชีวะ","อังกฤษ","ไทย","สังคม"],"chapters":[],"tasks":[],"studyMinutes":0,"studyBySubject":{},"studyByChapter":{},"exam":{"title":"","date":"","daily":180,"target":80},"streak":0,"lastStudy":""}');
 data.studyBySubject=data.studyBySubject||{};data.studyByChapter=data.studyByChapter||{};
